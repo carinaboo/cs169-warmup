@@ -54,7 +54,7 @@ describe User do
 
   it "login with incorrect password" do
     User.add("user1", "password")
-    user = User.login("user1", "password")
+    user = User.login("user1", "passwordwrong")
 
     expect(user).to eq(User::ERR_BAD_CREDENTIALS)
   end
