@@ -1,15 +1,3 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id         :integer          not null, primary key
-#  user       :string(255)
-#  password   :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  count      :integer
-#
-
 require 'spec_helper'
 
 describe User do
@@ -20,19 +8,19 @@ describe User do
     expect(user).to eq(User::SUCCESS)
   end
 
-  it "create account with empty user returns ERR_BAD_USERNAME" do
+  it "create account with empty user" do
     user = User.add("", "password")
 
     expect(user).to eq(User::ERR_BAD_USERNAME)
   end
 
-  it "create account with > 128 char user returns ERR_BAD_USERNAME" do
+  it "create account with > 128 char user" do
     user = User.add("usernameijofwjoefjwifowjfowjiefojowejfoiwejiofjwoiafjwejfowajfwalfwaifjwlijefilwjfiawjijflwjffwefwefwefweafwefwefwafeawefawefafw9", "password")
 
     expect(user).to eq(User::ERR_BAD_USERNAME)
   end
 
-  it "create account with repeat user returns ERR_USER_EXISTS" do
+  it "create account with repeat user" do
     user1 = User.add("username", "password1")
     user2 = User.add("username", "password2")
 
@@ -40,13 +28,13 @@ describe User do
     expect(user2).to eq(User::ERR_USER_EXISTS)
   end
 
-  it "create account with > 128 password returns ERR_BAD_PASSWORD" do
+  it "create account with > 128 password" do
     user = User.add("user", "passwordijofwjoefjwifowjfowjiefojowejfoiwejiofjwoiafjwejfowajfwalfwaifjwlijefilwjfiawjijflwjffwefwefwefweafwefwefwafeawefawefafw9")
 
     expect(user).to eq(User::ERR_BAD_PASSWORD)
   end
 
-  it "create account with empty password returns SUCCESS" do
+  it "create account with empty password" do
     user = User.add("user", "")
 
     expect(user).to eq(User::SUCCESS)
@@ -59,59 +47,25 @@ describe User do
     expect(user).to eq(User::ERR_BAD_CREDENTIALS)
   end
 
+  it "login as nonexistant user" do
+    user = User.login("nonexistant", "password")
 
-  # change later
-  it "create account with empty user returns ERR_BAD_USERNAME" do
-    user = User.add("", "password")
-
-    expect(user).to eq(User::ERR_BAD_USERNAME)
+    expect(user).to eq(User::ERR_BAD_CREDENTIALS)
   end
 
-  it "create account with > 128 char user returns ERR_BAD_USERNAME" do
-    user = User.add("usernameijofwjoefjwifowjfowjiefojowejfoiwejiofjwoiafjwejfowajfwalfwaifjwlijefilwjfiawjijflwjffwefwefwefweafwefwefwafeawefawefafw9", "password")
+  it "login with correct user name and password" do
+  	User.add("kevin", "isawseome")
+    count = User.login("kevin", "isawseome")
 
-    expect(user).to eq(User::ERR_BAD_USERNAME)
+    expect(count).to eq(2)
   end
 
-  it "create account with repeat user returns ERR_USER_EXISTS" do
-    user1 = User.add("username", "password1")
-    user2 = User.add("username", "password2")
+  it "login twice with correct user name and password" do
+  	User.add("kevincasey", "isawseome")
+  	User.login("kevincasey", "isawseome")
+    count = User.login("kevincasey", "isawseome")
 
-    expect(user1).to eq(User::SUCCESS)
-    expect(user2).to eq(User::ERR_USER_EXISTS)
-  end
-
-  it "create account with > 128 password returns ERR_BAD_PASSWORD" do
-    user = User.add("user", "passwordijofwjoefjwifowjfowjiefojowejfoiwejiofjwoiafjwejfowajfwalfwaifjwlijefilwjfiawjijflwjffwefwefwefweafwefwefwafeawefawefafw9")
-
-    expect(user).to eq(User::ERR_BAD_PASSWORD)
-  end
-
-  it "create account with empty password returns SUCCESS" do
-    user = User.add("user", "")
-
-    expect(user).to eq(User::SUCCESS)
+    expect(count).to eq(3)
   end
 
 end
-
-
-
-  # # password empty
-  # # valid
-  # User.add("user3", "")
-
-
-  # # TESTS: LOGIN EXISTING USER
-
-  # # user name empty
-  # # ERR_BAD_USERNAME
-  # User.login("","password")
-
-  # # user name does not exist
-  # # ERR_BAD_USERNAME
-  # User.login("unknown","password")
-
-  # # user name does not match password
-  # # ERR_BAD_CREDENTIALS
-  # User.login("user1","wrongpassword")

@@ -35,46 +35,7 @@ class UserController < ApplicationController
     output = `rspec #{Rails.root}/spec/`
     example = /(\d+) example/.match(output)[1]
     failures = /(\d+) failures/.match(output)[1]
-    render json: {nrFailed: failures.to_i, output: output, totalTests: example}
+    render json: {nrFailed: failures.to_i, output: output, totalTests: example.to_i}
   end
-
-  # TESTS: ADD USER
-
-  # # user name empty
-  # # ERR_BAD_USERNAME
-  # User.add("","password")
-
-  # # user name > 128 character
-  # # ERR_BAD_USERNAME
-  # User.add("usernameijofwjoefjwifowjfowjiefojowejfoiwejiofjwoiafjwejfowajfwalfwaifjwlijefilwjfiawjijflwjffwefwefwefweafwefwefwafeawefawefafw9", "password")
-
-  # # user name not unique
-  # # ERR_USER_EXISTS
-  # User.add("user1", "password")
-  # User.add("user1", "repeat")
-
-  # # password > 128 character
-  # # ERR_BAD_PASSWORD
-  # User.add("user2", "passwordijofwjoefjwifowjfowjiefojowejfoiwejiofjwoiafjwejfowajfwalfwaifjwlijefilwjfiawjijflwjffwefwefwefweafwefwefwafeawefawefafw9")
-
-  # # password empty
-  # # valid
-  # User.add("user3", "")
-
-
-  # # TESTS: LOGIN EXISTING USER
-
-  # # user name empty
-  # # ERR_BAD_USERNAME
-  # User.login("","password")
-
-  # # user name does not exist
-  # # ERR_BAD_USERNAME
-  # User.login("unknown","password")
-
-  # # user name does not match password
-  # # ERR_BAD_CREDENTIALS
-  # User.login("user1","wrongpassword")
-
 
 end
