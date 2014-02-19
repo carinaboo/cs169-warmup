@@ -1,3 +1,4 @@
+/* Using json request functions from professor, but I fully understand how the ajax request works */
 
 /* Takes a dictionary to be JSON encoded, calls the success
    function with the diction decoded from the JSON response.*/
