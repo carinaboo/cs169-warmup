@@ -121,7 +121,7 @@ function get_message_for_errcode(code) {
     if( code == ERR_BAD_CREDENTIALS) {
         return ("Invalid username and/or password. Please try again.");
     } else if( code == ERR_BAD_USERNAME) {
-        return ("The user name should not be empty and at most 128 characters long. Please try again.");
+        return ("The username cannot be empty or over 128 characters. Please try again.");
     } else if( code == ERR_USER_EXISTS) {
         return ("This user name already exists. Please try again.");
     } else if( code == ERR_BAD_PASSWORD) {
