@@ -1,10 +1,11 @@
+<div id="home-page">
 <center>
 <div id="login-page" class="box">
   <div id="login-message" class="message"></div>
   <center>
     <form>
-      Username: <input id="login-username" type="text" name="username"><br>
-      Password: <input id="login-password" type="password" name="pwd"><br>
+      <input id="login-username" type="text" name="username" placeholder="Username"><br>
+      <input id="login-password" type="password" name="pwd" placeholder="Password"><br>
       <input id="login-button" class="btn btn-primary" type="submit" value="Login">
       <input id="add-user-button" class="btn btn-success" type="submit" value="Add User">
     </form>
@@ -20,25 +21,14 @@
   </center>
 </div>
 </center>
+<div>
 
 <script type="text/javascript">
-/* Put the page into a blank state until everything finishes loading
-   This is not the ideal thing to do, but better than nothing. */
-$('#login-page').hide()
-$('#welcome-page').hide()
-$('#login-username').val("")
-$('#login-password').val("")
-$('#login-message').html("Please enter your credentials below")
-$('#welcome-message').html("You should never see this text");
 
-/* setup the page so that only one of the forms is shown */
 $(document).ready(function() {
-   show_login_page();
+   show_login_page("Please sign in or create a new user")
  });
 
-/* Note: These two functions are deliberately written to ignore the starting
-   state.  This makes them slightly slower, but has the side effect of 
-   restoring any invariant that gets accidentally broken.*/
 function show_login_page(message) {
   if(! message) message = "Please enter your credentials below";
   $('#welcome-page').hide()

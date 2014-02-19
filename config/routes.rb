@@ -3,10 +3,10 @@ Warmup::Application.routes.draw do
   # root :to => redirect('/home/index')
   # get "home/index"
 
-  get '/users', to: 'user#index', as: :user_form
-  post '/users', to: 'user#index', as: :user_index
+  # get '/users', to: 'user#index', as: :user_form
+  # post '/users', to: 'user#index', as: :user_index
 
-  # get '/', to: 'home#index', as: :home
+  get '/', to: 'home#index', as: :home
   # get '/users', to: 'user#index', as: :users_all
   post '/users/add', to: 'user#add'
   post '/users/login', to: 'user#login'
